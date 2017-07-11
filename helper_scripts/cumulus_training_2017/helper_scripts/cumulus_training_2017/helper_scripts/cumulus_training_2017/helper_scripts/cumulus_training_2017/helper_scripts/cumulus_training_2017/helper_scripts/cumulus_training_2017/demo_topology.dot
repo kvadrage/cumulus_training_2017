@@ -1,0 +1,21 @@
+graph vx {
+ "leaf01" [function="leaf" os="CumulusCommunity/cumulus-vx" memory="512" mgmt_ip="192.168.200.11"]
+ "leaf02" [function="leaf" os="CumulusCommunity/cumulus-vx" memory="512" mgmt_ip="192.168.200.12"]
+ "spine" [function="spine" os="CumulusCommunity/cumulus-vx" memory="512" mgmt_ip="192.168.200.21"]
+ "server01" [function="host" os="yk0/ubuntu-xenial" memory="512" mgmt_ip="192.168.200.31"]
+ "server02" [function="host" os="yk0/ubuntu-xenial" memory="512" mgmt_ip="192.168.200.32"]
+ "oob-mgmt-switch" [function="oob-switch" os="CumulusCommunity/cumulus-vx" memory="512" mgmt_ip="192.168.200.1"]
+ "oob-mgmt-server" [function="oob-server" os="yk0/ubuntu-xenial" memory="1024" mgmt_ip="192.168.200.254"]
+
+ "leaf01":"swp1" -- "spine":"swp1"
+ "leaf01":"swp2" -- "spine":"swp12"
+ "leaf01":"swp3" -- "spine":"swp13"
+ "leaf01":"swp4" -- "spine":"swp14"
+ "leaf02":"swp21" -- "spine":"swp2"
+ "leaf02":"swp22" -- "spine":"swp22"
+ "leaf02":"swp23" -- "spine":"swp23"
+ "leaf02":"swp24" -- "spine":"swp24"
+
+ "server01":"eth1" -- "leaf01":"swp16" [left_mac="00:03:00:11:11:01"]
+ "server02":"eth1" -- "leaf02":"swp16" [left_mac="00:03:00:22:22:01"]
+}
